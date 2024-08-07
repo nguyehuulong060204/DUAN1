@@ -79,7 +79,7 @@ const Contact = () => {
             })}
           </div>
           <div className={cx('location-img')}>
-            <iframe src={DATA.LOCATION_DATA[mapIndex].map} width="600" height="450"></iframe>
+            <iframe src={DATA.LOCATION_DATA[mapIndex]?.map} width="600" height="450"></iframe>
           </div>
         </div>
       </section>
