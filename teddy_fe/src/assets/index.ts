@@ -9,6 +9,9 @@ import typingExperience from './type-experience.jpeg'
 import services from './services.jpeg'
 import productDefault from './productDefault.png'
 import gifts from './gifts.jpeg'
+import email from './envelope.png'
+import phone from './phone.png'
+import map from './map.png'
 const images = {
   placeholderImageBlog,
   homeBanner,
@@ -20,7 +23,10 @@ const images = {
   typingExperience,
   services,
   productDefault,
-  gifts
+  gifts,
+  email,
+  map,
+  phone
 }
 
 export default images

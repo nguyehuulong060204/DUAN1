@@ -6,10 +6,25 @@
   max-width: 624px;
 }
 
+.user-support {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  max-width: 406px;
+
+  .user-info {
+    align-items: center;
+    text-align: center;
+  }
+}
+
 .user-avatar {
-  max-width: 280px;
+  width: 280px;
   height: 280px;
   cursor: pointer;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
   img {
     width: 100%;
@@ -21,6 +36,18 @@
 
   &:hover img {
     transform: scale(1.05);
+  }
+}
+
+.support-avatar {
+  width: 80px;
+  height: 80px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50rem;
   }
 }
 
@@ -50,10 +77,19 @@
   align-items: flex-start;
   gap: 14px;
   cursor: pointer;
+  margin-top: auto;
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--neutral);
+    transition: 0.2s linear;
+  }
 }
 
 @media screen and (max-width: 63.938rem) {
-  .user-item {
+  .user-item,
+  .user-support {
     padding: 20px;
     border: 1px solid var(--neutral);
     border-radius: 8px;
@@ -67,7 +103,8 @@
 }
 
 @media screen and (max-width: 48rem) {
-  .user-item {
+  .user-item,
+  .user-support {
     flex-direction: column;
   }
 }
