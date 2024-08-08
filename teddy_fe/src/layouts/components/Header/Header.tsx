@@ -98,7 +98,6 @@ const Header = () => {
   }
   const handleLogoutUser = () => {
     dispatch<any>(logoutUser())
-    location.reload()
   }
   return (
     <header className={cx('header')}>
@@ -115,7 +114,7 @@ const Header = () => {
             </li>
             <li className={cx('menu-item')}>
               <Link to={config.routes.about} className={cx('menu-link')}>
-              Giới thiệu
+                Giới thiệu
               </Link>
             </li>
             <li className={cx('menu-item')}>
