@@ -12,7 +12,7 @@ import config from '~/config'
 import routes from '~/config/routes'
 import { useSelector, useDispatch } from 'react-redux'
 import images from '~/assets'
-import { logoutUser } from '~/feature/auth/authSlice'
+import { logoutUser, resetState } from '~/feature/auth/authSlice'
 
 const cx = classNames.bind(styles)
 
@@ -97,7 +97,7 @@ const Header = () => {
     setMenuMobile(!menuMobile)
   }
   const handleLogoutUser = () => {
-    dispatch<any>(logoutUser())
+    dispatch<any>(dispatch(resetState()))
   }
   return (
     <header className={cx('header')}>

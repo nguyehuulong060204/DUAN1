@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind'
 import { FaRegStar } from 'react-icons/fa'
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md'
-import { useEffect,useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import styles from './ProductDetail.module.scss'
 import images from '~/assets'
@@ -18,29 +18,27 @@ import Tabs from '~/components/Tabs'
 
 const cx = classNames.bind(styles)
 
-const ProductDetail = () => {
-  const dispatch = useDispatch()
-  const location = useLocation()
-  const productId = location.pathname.split('/')[2]
+const dispatch = useDispatch()
+const location = useLocation()
+const productId = location.pathname.split('/')[2]
 
-  const [productCount, setProductCount] = useState<number>(1)
+const [productCount, setProductCount] = useState<number>(1)
 
-  // product detail data
-  useEffect(() => {
-    dispatch<any>(getProduct(productId))
-  }, [productId, dispatch])
+// product detail data
+useEffect(() => {
+  dispatch<any>(getProduct(productId))
+}, [productId, dispatch])
 
-  const product: ProductModel = useSelector((state: any) => state.product?.product)
-  const { price, name, images: productImages, description, warranty } = product
+const product: ProductModel = useSelector((state: any) => state.product?.product)
+const { price, name, images: productImages, description, warranty } = product
 
-  const [productImageMain, setProductImageMain] = useState<string | undefined>('')
-  const productPrice = formatPrice(price)
+const [productImageMain, setProductImageMain] = useState<string | undefined>('')
+const productPrice = formatPrice(price)
 
-  // handle product count
-  const increaseProductCount = () => {}
+// handle product count
+const increaseProductCount = () => {}
 
-  const decreaseProductCount = () => {}
-}
+const decreaseProductCount = () => {}
 
 const performanceData = [
   {
@@ -100,23 +98,23 @@ const ProductDetail = () => {
       <section className={cx('product-detail')}>
         <div className={cx('product-img')}>
           <div className={cx('product-img-main')}>
-          <img src={productImageMain || (productImages && productImages[0]?.url)} alt="product" />
+            <img src={productImageMain || (productImages && productImages[0]?.url)} alt="product" />
           </div>
           {productImages?.map((item, index) => {
-              return (
-                <div className={cx('product-img-item')} key={index} onClick={() => setProductImageMain(item?.url)}>
-                  <img src={item.url} alt="product" />
-                </div>
-              )
-            })}
+            return (
+              <div className={cx('product-img-item')} key={index} onClick={() => setProductImageMain(item?.url)}>
+                <img src={item.url} alt="product" />
+              </div>
+            )
+          })}
         </div>
         <div className={cx('product-info')}>
           <div className={cx('product-info-left')}>
-          <h3 className={cx('product-name')}>{name}</h3>
-          <Tabs desctiption={description} warranty={warranty} />
+            <h3 className={cx('product-name')}>{name}</h3>
+            <Tabs desctiption={description} warranty={warranty} />
           </div>
           <div className={cx('product-info-right')}>
-          <h4 className={cx('product-price')}>{productPrice}</h4>
+            <h4 className={cx('product-price')}>{productPrice}</h4>
             <div className={cx('product-reviews')}>
               <div className={cx('starts')}>
                 <FaRegStar />
@@ -140,7 +138,7 @@ const ProductDetail = () => {
               </Button>
             </div>
             <div className={cx('product-quantity')}>
-            <Button outline className={cx('product-btn')} onClick={decreaseProductCount}>
+              <Button outline className={cx('product-btn')} onClick={decreaseProductCount}>
                 -
               </Button>
               <input type="number" className={cx('product-input')} value={productCount} />
@@ -150,10 +148,10 @@ const ProductDetail = () => {
             </div>
             <div className={cx('product-action')}>
               <Button background large className={cx('product-add')}>
-              Thêm vào giỏ hàng
+                Thêm vào giỏ hàng
               </Button>
               <Button outline large className={cx('product-buy')}>
-              Mua ngay
+                Mua ngay
               </Button>
             </div>
           </div>
