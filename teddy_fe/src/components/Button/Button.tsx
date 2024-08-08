@@ -8,6 +8,7 @@ const cx = classNames.bind(styles)
 interface buttonProps {
   to?: string
   href?: string
+  type?: string
   outline?: boolean
   background?: boolean
   primary?: boolean
@@ -25,6 +26,7 @@ interface buttonProps {
 const Button: React.FC<buttonProps> = ({
   to,
   href,
+  type,
   outline = false,
   disabled = false,
   background = false,
@@ -57,11 +59,15 @@ const Button: React.FC<buttonProps> = ({
     props.href = href
     Comp = 'a'
   }
-
+    // Thêm type vào object props
+    if (type) {
+      props.type = type
+    }
   const classes = cx('wrapper', {
     [className!]: className,
     to,
     href,
+    type,
     outline,
     background,
     primary,
