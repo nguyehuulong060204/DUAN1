@@ -1,23 +1,18 @@
 import classNames from 'classnames/bind'
-import {useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import styles from './Contact.module.scss'
 import Heading from '~/components/Heading'
 import Button from '~/components/Button'
 import UserItem from '~/components/UserItem'
 import { DATA } from '~/constants'
-import { useDispatch, useSelector } from 'react-redux'
-import { getMembers } from '~/feature/member/memberSlice'
+import { useSelector } from 'react-redux'
 import { memberModal } from '~/models/member'
 
 const cx = classNames.bind(styles)
 
 const Contact = () => {
-  const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch<any>(getMembers())
-  }, [dispatch])
   const memberState = useSelector((state: any) => state.member?.members)
 
   const [mapIndex, setMapIndex] = useState(0)

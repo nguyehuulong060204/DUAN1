@@ -7,7 +7,7 @@ import images from '~/assets'
 import BlogList from '~/components/BlogList'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { getBlogByCategory, getBlogs, getCategories } from '~/features/blog/blogSlice'
+import { getBlogByCategory, getBlogs, getCategories } from '~/feature/blog/blogSlice'
 import { blogCategory } from '~/models'
 
 const cx = classNames.bind(styles)
@@ -17,14 +17,15 @@ const Blogs = () => {
   const [blogId, setBlogId] = useState<string>('')
 
   useEffect(() => {
+    dispatch<any>(getCategories())
+  }, [dispatch])
+
+  useEffect(() => {
     if (blogId !== '') dispatch<any>(getBlogByCategory(blogId))
     else dispatch<any>(getBlogs())
   }, [dispatch, blogId])
 
-  useEffect(() => {
-    dispatch<any>(getCategories())
-    dispatch<any>(getBlogs())
-  }, [dispatch])
+
 
   const blogState = useSelector((state: any) => state.blog)
   const { blogCategories, blogs } = blogState
