@@ -8,10 +8,21 @@ import UserItem from '~/components/UserItem'
 import images from '~/assets'
 import { DATA } from '~/constants'
 import config from '~/config'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getMembers } from '~/feature/member/memberSlice'
+import { memberModal } from '~/models/member'
 
 const cx = className.bind(styles)
 
 const About = () => {
+  const dispatch = useDispatch()
+
+  const memberState = useSelector((state: any) => state.member?.members)
+
+  useEffect(() => {
+    dispatch<any>(getMembers())
+  }, [dispatch])
   return (
     <div className={cx('about-wrapper')}>
       <section className={cx('smooth-typing')}>
@@ -46,7 +57,7 @@ const About = () => {
           desc="Hãy cùng phám phá các cá nhân tài năng đằng sau công ty của chúng tôi."
         />
         <div className={cx('team-list')}>
-          {DATA.TEAM_LIST.map((item, index) => {
+        {memberState?.map((item: memberModal, index: number) => {
             return <UserItem key={index} {...item} />
           })}
         </div>
