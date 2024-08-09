@@ -32,3 +32,10 @@ export interface Brand {
     totalRating: number
     status: string
   }
+  export interface productCatModal {
+    _id: string
+    name: string
+    tags: string[]
+    totalProduct: number
+    slogan: string
+  }
