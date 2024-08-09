@@ -5,6 +5,16 @@ import Heading from '~/components/Heading'
 import Button from '~/components/Button'
 import EventPreviewBox from '~/components/EventPreviewBox'
 import Schedule from '~/components/Schedule'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { getEvent, getScheduleByEventId } from '~/features/event/eventSlice'
+import { resetState } from '~/features/auth/authSlice'
+import { memberModal } from '~/models'
+import moment from 'moment'
+import { convertToVietnameseDay, convertToVietnameseMonth } from '~/utils/formaatedTime'
+import EventTime from '~/components/EventTime'
+import { scheduleModal } from '~/models/event'
 import images from '~/assets'
 import { DATA } from '~/constants'
 
@@ -53,62 +63,38 @@ const eventList = [
   }
 ]
 
-const scheduleData = [
-  {
-    date: '6',
-    day: '18',
-    month: '04',
-    year: '2024',
-    schedule: [
-      {
-        time: '8:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      },
-      {
-        time: '9:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      },
-      {
-        time: '10:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      }
-    ]
-  },
-  {
-    date: '7',
-    day: '19',
-    month: '04',
-    year: '2024',
-    schedule: [
-      {
-        time: '8:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      },
-      {
-        time: '9:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      },
-      {
-        time: '10:00 AM',
-        name: 'Hội thảo về bàn phím thông minh',
-        tags: ['Trực tiếp', 'Online']
-      }
-    ]
-  }
-]
-
 const Events = () => {
+  const dispatch = useDispatch()
+  const location = useLocation()
+
+  const eventId = location.pathname.split('/')[2]
+
+  useEffect(() => {
+    if (eventId) {
+      dispatch<any>(getEvent(eventId))
+      dispatch<any>(getScheduleByEventId(eventId))
+    } else dispatch<any>(resetState())
+  }, [eventId, dispatch])
+
+  const eventState = useSelector((state: any) => state.event?.event)
+  const scheduleState = useSelector((state: any) => state.event?.schedules)
+
+  const { members, name, tag, time, title, description } = eventState
+
+  const datetime = moment(time).locale('vi')
+  // ngày diễn ra
+  const day = datetime.format('D')
+  const date = convertToVietnameseDay(datetime.format('dddd'))
+  const month = convertToVietnameseMonth(datetime.format('MMM'))
+  const year = datetime.format('YYYY')
+
+  const formattedData = `${date} - Ngày ${day} - ${month} - ${year}`
   return (
     <div className={cx('events-wrapper')}>
       <section className={cx('event-heading')}>
         <Heading
           heading="Tham gia cộng đồng bàn phím"
-         desc="Chúng tôi luôn cập nhật thông tin mới nhất về các triển lãm bàn phím,
+          desc="Chúng tôi luôn cập nhật thông tin mới nhất về các triển lãm bàn phím,
          triển lãm thương mại và các buổi gặp gỡ trong lĩnh vực này. Điều này giúp bạn 
          không bỏ lỡ bất kỳ sự kiện quan trọng nào và cung cấp cho bạn những thông tin 
          mới nhất về các sản phẩm và xu hướng hàng đầu trong ngành."

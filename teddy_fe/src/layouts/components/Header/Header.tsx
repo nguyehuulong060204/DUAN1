@@ -7,7 +7,7 @@ import styles from './Header.module.scss'
 import Button from '~/components/Button'
 import MegaMenu from '~/components/MegaMenu'
 import BlogHeader from '../BlogHeader'
-import { useEffect,useState } from 'react'
+import { useEffect, useState } from 'react'
 import config from '~/config'
 import routes from '~/config/routes'
 import { useSelector, useDispatch } from 'react-redux'
@@ -21,8 +21,6 @@ import { productCatModal } from '~/models'
 import { getMembers } from '~/feature/member/memberSlice'
 
 const cx = classNames.bind(styles)
-
-
 
 const Header = () => {
   const [menuMobile, setMenuMobile] = useState(false)
@@ -39,7 +37,7 @@ const Header = () => {
 
   const blogState = useSelector((state: any) => state.blog?.blogs)?.slice(0, 2)
   const brandState = useSelector((state: any) => state.brand?.brands).slice(0, 4)
-  const productCatState = useSelector((state: any) => state.product?.productCategories).slice(0, 4)
+  const productCatState = useSelector((state: any) => state.product?.productCategories)?.slice(0, 4)
 
   const blogData = {
     name: 'Bài viết nổi bật',
@@ -109,7 +107,7 @@ const Header = () => {
                     <MegaMenu data={productCatData} />
                   </div>
                   <div className={cx('mega-right')}>
-                  <BlogHeader data={blogData} />
+                    <BlogHeader data={blogData} />
                   </div>
                 </div>
               </div>

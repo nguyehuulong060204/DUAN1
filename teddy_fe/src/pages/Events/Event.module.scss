@@ -45,7 +45,11 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  gap: 48px;
+  gap: 32px;
+}
+
+.content-right {
+  font-size: 1.8rem;
   flex: 1 0 0;
   width: 100%;
 }
