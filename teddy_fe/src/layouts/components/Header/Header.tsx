@@ -12,8 +12,10 @@ import config from '~/config'
 import routes from '~/config/routes'
 import { useSelector, useDispatch } from 'react-redux'
 import images from '~/assets'
-import { logoutUser, resetState } from '~/features/auth/authSlice'
-import { getBlogs } from '~/features/blog/blogSlice'
+import { logoutUser, resetState } from '~/feature/auth/authSlice'
+import { getBlogs } from '~/feature/blog/blogSlice'
+import { getBrands } from '~/feature/brand/brandSlice'
+import { brandModal } from '~/models/brand'
 
 const cx = classNames.bind(styles)
 
@@ -76,16 +78,31 @@ const Header = () => {
 
   useEffect(() => {
     dispatch<any>(getBlogs())
+    dispatch<any>(getBrands())
   }, [dispatch])
 
   const userState = useSelector((state: any) => state.auth)
 
   const blogState = useSelector((state: any) => state.blog?.blogs)?.slice(0, 2)
+  const brandState = useSelector((state: any) => state.brand?.brands).slice(0, 4)
 
   const blogData = {
     name: 'Bài viết nổi bật',
     blogs: blogState
   }
+
+  const brandData = {
+    name: 'Hãng sản xuất',
+    items: brandState.map((brand: brandModal) => {
+      return {
+        id: brand._id,
+        name: brand.name,
+        link: config.routes.brandDetail.replace(':id', brand._id),
+        desc: brand.slogan
+      }
+    })
+  }
+
   const { user } = userState
   const showOnMenu = () => {
     setMenuMobile(!menuMobile)
@@ -122,8 +139,8 @@ const Header = () => {
                 <MdExpandMore />
                 <div className={cx('mega-menu')}>
                   <div className={cx('mega-left')}>
-                    <MegaMenu data={subCategoriesData} />
-                    <MegaMenu data={subBrandData} />
+                    <MegaMenu data={brandData} />
+                    <MegaMenu data={brandData} />
                   </div>
                   <div className={cx('mega-right')}>
                   <BlogHeader data={blogData} />
