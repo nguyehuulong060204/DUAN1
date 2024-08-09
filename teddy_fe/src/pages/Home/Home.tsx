@@ -15,7 +15,6 @@ import Loading from '~/components/Loading/Loading'
 
 const cx = classNames.bind(styles)
 
-
 const Home = () => {
   const dispatch = useDispatch()
 
@@ -122,7 +121,7 @@ const Home = () => {
               </p>
             </div>
             <div className={cx('feature-action')}>
-              <Button outline small to="">
+              <Button outline small to={config.routes.blogPost.replace(':id', '65dbc96680a8df07db153bd7')}>
                 Tìm hiểu thêm
               </Button>
               <Button to={routes.login} small rightIcon={<RiArrowRightSLine />}>
@@ -214,7 +213,11 @@ const Home = () => {
               <Button to="" small outline>
                 Tìm hiểu thêm
               </Button>
-              <Button to="" small rightIcon={<RiArrowRightSLine />}>
+              <Button
+                to={config.routes.blogPost.replace(':id', '65dbc89e80a8df07db153bcb')}
+                small
+                rightIcon={<RiArrowRightSLine />}
+              >
                 Đăng nhập
               </Button>
             </div>
