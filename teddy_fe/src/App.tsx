@@ -53,7 +53,7 @@ function App() {
                       <Page />
                     </Layout>
                   ) : (
-                    <Navigate to="/login" replace state={{ previousPath: route.path }} />
+                    <Navigate to="/login" replace />
                   )
                 }
               />

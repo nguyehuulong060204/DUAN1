@@ -36,7 +36,6 @@
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: auto;
   gap: 16px;
- 
 }
 
 .product-img-item {
@@ -62,17 +61,17 @@
 }
 
 .product-info-left {
-
   display: flex;
   flex-direction: column;
   gap: 24px;
-  // flex: 1 0 0;
+
+  width: 832px;
   width: 832px;
   flex-shrink: 0;
 }
 
 .product-name {
-  font-size: 3,4rem;
+  font-size: 3, 4rem;
   font-weight: 700;
   line-height: calc(48 / 34);
 }
@@ -106,6 +105,18 @@
 .starts {
   display: flex;
   gap: 5px;
+  .product-colors,
+  .product-optios,
+  .product-switch {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .product-option {
+    padding: 6px 10px;
+  }
 }
 
 .product-type {
@@ -114,7 +125,10 @@
   gap: 16px;
   flex-wrap: wrap;
 }
-
+.product-text {
+  font-weight: 500;
+  font-size: 1.6rem;
+}
 .product-quantity {
   display: flex;
   gap: 14px;
